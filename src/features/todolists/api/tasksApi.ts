@@ -11,7 +11,7 @@ export const toDomainTask = ({ id, attributes }: ApiResource<TaskAttributes>, to
 export const tasksApi = {
   getTasks(todolistId: string) {
     return instance
-      .get<GetTasksResponse>(`/boards/${todolistId}/tasks`, { params: { pageSize: 20 } })
+      .get<GetTasksResponse>(`/boards/${todolistId}/tasks`)
       .then((res) => res.data.data.map((task) => toDomainTask(task, todolistId)))
   },
   createTask(payload: { todolistId: string; title: string }) {

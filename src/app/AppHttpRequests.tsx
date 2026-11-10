@@ -38,8 +38,8 @@ export const AppHttpRequests = () => {
   }
 
   const changeTodolistTitle = (id: string, title: string) => {
-    todolistsApi.changeTodolistTitle({ id, title }).then(() => {
-      setTodolists(todolists.map((todolist) => (todolist.id === id ? { ...todolist, title } : todolist)))
+    todolistsApi.changeTodolistTitle({ id, title }).then((updatedTodolist) => {
+      setTodolists(todolists.map((todolist) => (todolist.id === id ? updatedTodolist : todolist)))
     })
   }
 
@@ -62,8 +62,8 @@ export const AppHttpRequests = () => {
       status: e.target.checked ? TaskStatus.Completed : TaskStatus.New,
     }
 
-    tasksApi.updateTask({ todolistId, taskId: task.id, model }).then(() => {
-      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === task.id ? { ...t, ...model } : t)) })
+    tasksApi.updateTask({ todolistId, taskId: task.id, model }).then((updatedTask) => {
+      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === task.id ? updatedTask : t)) })
     })
   }
 
@@ -74,8 +74,8 @@ export const AppHttpRequests = () => {
       title,
     }
 
-    tasksApi.updateTask({ todolistId, taskId: task.id, model }).then(() => {
-      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === task.id ? { ...t, ...model } : t)) })
+    tasksApi.updateTask({ todolistId, taskId: task.id, model }).then((updatedTask) => {
+      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === task.id ? updatedTask : t)) })
     })
   }
 
