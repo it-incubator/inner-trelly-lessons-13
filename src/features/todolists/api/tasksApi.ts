@@ -1,8 +1,13 @@
 import { instance } from "@/common/instance"
 import type { ApiResource, BaseResponse } from "@/common/types"
-import type { DomainTask, GetTasksResponse, TaskAttributes, UpdateTaskModel } from "./tasksApi.types"
+import type {
+  DomainTask,
+  GetTasksResponse,
+  TaskAttributes,
+  UpdateTaskModel,
+} from "@/features/todolists/api/tasksApi.types"
 
-export const toDomainTask = ({ id, attributes }: ApiResource<TaskAttributes>, todolistId: string): DomainTask => ({
+const toDomainTask = ({ id, attributes }: ApiResource<TaskAttributes>, todolistId: string): DomainTask => ({
   id,
   ...attributes,
   todolistId,

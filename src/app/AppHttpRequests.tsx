@@ -63,7 +63,7 @@ export const AppHttpRequests = () => {
     }
 
     tasksApi.updateTask({ todolistId, taskId: task.id, model }).then((updatedTask) => {
-      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((t) => (t.id === task.id ? updatedTask : t)) })
+      setTasks({ ...tasks, [todolistId]: tasks[todolistId].map((el) => (el.id === task.id ? updatedTask : el)) })
     })
   }
 
@@ -106,7 +106,7 @@ const container: CSSProperties = {
   border: "1px solid black",
   margin: "20px 0",
   padding: "10px",
-  width: "330px",
+  width: "300px",
   display: "flex",
   justifyContent: "space-between",
   flexDirection: "column",

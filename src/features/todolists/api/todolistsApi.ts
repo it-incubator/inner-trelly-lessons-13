@@ -1,10 +1,10 @@
 import { instance } from "@/common/instance"
 import type { ApiResource, BaseResponse } from "@/common/types"
-import type { Todolist, TodolistAttributes } from "./todolistsApi.types"
+import type { Todolist, TodolistAttributes } from "@/features/todolists/api/todolistsApi.types"
 
 const toTodolist = ({ id, attributes }: ApiResource<TodolistAttributes>): Todolist => ({
   id,
-  ...attributes
+  ...attributes,
 })
 
 export const todolistsApi = {
@@ -16,17 +16,22 @@ export const todolistsApi = {
   changeTodolistTitle(payload: { id: string; title: string }) {
     const { id, title } = payload
     return instance
-      .patch<BaseResponse<ApiResource<TodolistAttributes>>>(`/boards/${id}`, { data: { type: "boards", attributes: { title } } })
+      .patch<BaseResponse<ApiResource<TodolistAttributes>>>(`/boards/${id}`, {
+        data: {
+          type: "boards",
+          attributes: { title },
+        },
+      })
       .then((res) => toTodolist(res.data.data))
   },
   createTodolist(title: string) {
     return instance
       .post<BaseResponse<ApiResource<TodolistAttributes>>>("/boards", {
-        data: { type: "boards", attributes: { title } }
+        data: { type: "boards", attributes: { title } },
       })
       .then((res) => toTodolist(res.data.data))
   },
   deleteTodolist(id: string) {
     return instance.delete(`/boards/${id}`)
-  }
+  },
 }
